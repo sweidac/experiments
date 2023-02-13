@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<title>Scroll Events</title>
+		<script src="lib/peasy.min.js"></script>
+
+		<style>
+			body {
+				height: 200%;
+				width: 200%;
+			}
+
+			#loggers {
+				position: fixed;
+				left: 50%;
+				top: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="loggers"></div>
+
+		<script>
+			const eventTypes = [ 'scroll', 'wheel', 'touchstart', 'touchend', 'touchmove', 'touchcancel' ];
+
+			eventTypes.forEach(type => {
+				const logger = html`
+					<div>${type}: <span></span></div>
+				`;
+
+				document.querySelector('#loggers').append(logger);
+
+				const countDisplay = logger.querySelector('span');
+
+				let count = 0;
+
+				document.body.addEventListener(type, event => {
+					count++;
+					countDisplay.innerText = count;
+				});
+			});
+		</script>
+	</body>
+</html>
